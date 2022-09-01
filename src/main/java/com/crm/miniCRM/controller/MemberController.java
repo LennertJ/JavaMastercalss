@@ -12,6 +12,7 @@ import com.crm.miniCRM.model.persistence.interfaces.PersonRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
@@ -52,17 +53,62 @@ public class MemberController {
                 }
             }
             if(!communityExists){
-                System.out.println("communityId " + communityId);
                 Community c = communityService.findById(communityId).orElse(null);
                 if(c!=null){
                     memberDtos.add(new MemberDto(c, person, m.getSince(),m.getUntil()));
                 }
                 else{
-                    System.out.println("oei");
+                    System.out.println("Community does not exist");
                 }
             }
         });
         model.addAttribute("members", memberDtos);
         return "members";
+    }
+
+    @GetMapping("/editMembers/{id}")
+    public String editPerson(Model model,@PathVariable("id") Long id) {
+        ArrayList<MemberDto> memberDtos = CreateMemberDtoFromCommunity(id);
+        assert memberDtos != null;
+        model.addAttribute("communityMembers", memberDtos.get(0).getPersons());
+        model.addAttribute("nonCommunityMembers", memberDtos.get(1).getPersons());
+        return "edit-members";
+        //return null;
+    }
+
+    private ArrayList<MemberDto> CreateMemberDtoFromCommunity(Long id) {
+        ArrayList<Member> members = (ArrayList<Member>) memberService.findAll();
+        Community c = communityService.findById(id).orElse(null);
+        if(c==null){
+            return null;
+        }
+        MemberDto memberDto = new MemberDto(c);
+        MemberDto nonMemberDto = new MemberDto(c);
+        ArrayList<Long> personsAdded = new ArrayList<>();
+        Person person;
+        for (Member member: members) {
+            if(Objects.equals(member.getId().getCommunity_ID(), memberDto.getCommunity().getID())){
+                person = personService.findById(member.getId().getPerson_ID()).orElse(null);
+                if(person!=null){
+                    if(!personsAdded.contains(person.getId()) ){
+                        memberDto.addPersonToCommunity(person);
+                        personsAdded.add(person.getId());
+                    }
+                }
+            }else{
+                person = personService.findById(member.getId().getPerson_ID()).orElse(null);
+                if(person!=null){
+                    if(!personsAdded.contains(person.getId()) ){
+                        nonMemberDto.addPersonToCommunity(person);
+                        personsAdded.add(person.getId());
+                    }
+
+                }
+            }
+        }
+        ArrayList<MemberDto> memberDtos = new ArrayList<>();
+        memberDtos.add(memberDto);
+        memberDtos.add(nonMemberDto);
+        return memberDtos;
     }
 }

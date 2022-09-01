@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Members</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<table class="table col-md-6 ml-3">
+    <thead>
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Change Community Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="person : ${communityMembers}">
+        <td th:text="${person.firstName}"></td>
+        <td th:text="${person.lastName}"></td>
+        <td><a  type="button" class="btn btn-danger">delete</a></td>
+    </tr>
+    <tr th:each="person : ${nonCommunityMembers}">
+        <td th:text="${person.firstName}"></td>
+        <td th:text="${person.lastName}"></td>
+        <td><a  type="button" class="btn btn-success">add to event</a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

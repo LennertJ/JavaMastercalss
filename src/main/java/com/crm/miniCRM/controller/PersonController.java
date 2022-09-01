@@ -41,7 +41,7 @@ public class PersonController {
 
     @PostMapping
     public String addperson(PersonDto person) {
-        if(personService.findById(person.getId()).orElse(null)==null){
+        if(person.getId()==null){
             personService.save(convertToEntity(person));
         }else{
             personService.save(convertToEntityEdit(person));

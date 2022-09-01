@@ -23,14 +23,14 @@
       <td th:text="${member.since}"></td>
       <td th:text="${member.until}"></td>
       <td>
-        <a href="/soon/tm/${member.communityId}" type="button" class="btn btn-warning">edit</a>
-
+        <a th:href="@{/members/editMembers/{id}(id=${member.Community.ID})}" type="button" class="btn btn-warning">edit</a>
       </td>
     </tr>
     </tbody>
   </table>
-<p>
-  <a th:href="@{/}" class="btn btn-link">Home</a>
-</p>
+  <p>
+    <a th:href="@{/community/new}" class="btn btn-link">New Community</a>
+    <a th:href="@{/persons}" class="btn btn-link">persons</a>
+  </p>
 </body>
 </html>
