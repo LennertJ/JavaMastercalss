@@ -52,13 +52,12 @@ public class MemberController {
                 }
             }
             if(!communityExists){
-                System.out.println("communityId " + communityId);
                 Community c = communityService.findById(communityId).orElse(null);
                 if(c!=null){
                     memberDtos.add(new MemberDto(c, person, m.getSince(),m.getUntil()));
                 }
                 else{
-                    System.out.println("oei");
+                    System.out.println("Community does not exist");
                 }
             }
         });
