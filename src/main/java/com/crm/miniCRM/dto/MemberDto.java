@@ -1,41 +1,49 @@
 package com.crm.miniCRM.dto;
 
+import com.crm.miniCRM.model.Person;
 import com.crm.miniCRM.model.persistence.helpers.MemberID;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class MemberDto {
-    private MemberID id;
+    private long communityId;
     private LocalDate since;
     private LocalDate until;//default 9999-21-31
+    private ArrayList<Person> persons;
+    private String personNames;
 
-    public MemberDto(MemberID id, LocalDate since, LocalDate until) {
-        this.id = id;
+    public MemberDto(long id, Person person, LocalDate since, LocalDate until) {
+        this.communityId = id;
         this.since = since;
         this.until = until;
+        this.persons = new ArrayList<>();
+        this.persons.add(person);
+        this.personNames = person.getFirstName()+ "; ";
     }
 
-    public MemberID getId() {
-        return id;
+    public long getCommunityId() {
+        return communityId;
     }
 
-    public void setId(MemberID id) {
-        this.id = id;
+    public void addPersonToCommunity(Person person){
+        this.persons.add(person);
+        this.personNames+= person.getFirstName()+ "; ";
     }
 
     public LocalDate getSince() {
         return since;
     }
 
-    public void setSince(LocalDate since) {
-        this.since = since;
-    }
-
     public LocalDate getUntil() {
         return until;
     }
 
-    public void setUntil(LocalDate until) {
-        this.until = until;
+    public ArrayList<Person> getPersons() {
+        return persons;
+    }
+
+    public String getPersonNames() {
+        return personNames;
     }
 }
