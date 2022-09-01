@@ -24,9 +24,13 @@
       <td th:text="${member.until}"></td>
       <td>
         <a href="/soon/tm/${member.communityId}" type="button" class="btn btn-warning">edit</a>
+
       </td>
     </tr>
     </tbody>
   </table>
+<p>
+  <a th:href="@{/}" class="btn btn-link">Home</a>
+</p>
 </body>
 </html>
