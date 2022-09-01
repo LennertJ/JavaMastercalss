@@ -3,10 +3,12 @@ package com.crm.miniCRM.controller;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.crm.miniCRM.dto.PersonDto;
 import com.crm.miniCRM.model.Person;
 import com.crm.miniCRM.model.persistence.interfaces.PersonRepository;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -37,6 +39,11 @@ public class PersonController {
         return "new-person";
     }
 
+    @GetMapping("/edit")
+    public String register() {
+        return "redirect:/";
+    }
+
     @PostMapping
     public String addperson(PersonDto person) {
         personService.save(convertToEntity(person));
@@ -44,15 +51,27 @@ public class PersonController {
         return "redirect:/persons";
     }
 
-   /* @PostMapping()
-    public String editPerson(PersonDto person) {
-        personService.save(convertToEntity(person));
+    @GetMapping("/edit/{id}")
+    public String editPerson(Model model,@PathVariable("id") Long id) {
+        Optional<Person> person = null;
+        try {
+            person = personService.findById(id);
+        } catch (ResourceNotFoundException ex) {
+            model.addAttribute("errorMessage", "Person not found");
+        }
+        model.addAttribute("person", person);
 
-        return person.toString();
-    }*/
+        return "edit-person";
+    }
 
+    @PostMapping("/savePerson")
+    public String savePerson(@ModelAttribute("person") Person person) {
+        // save employee to database
+        personService.save(person);
+        return "redirect:/";
+    }
     @GetMapping("/delete/{id}")
-    public String deletePerson(@PathVariable("id") Long id){
+    public String deletePerson(@PathVariable("id") Long id) {
 
         personService.save(personService.softDeleteById(id));
         return "redirect:/persons";
@@ -64,16 +83,15 @@ public class PersonController {
 
     protected Person convertToEntity(PersonDto dto) {
         //29-06-1963
-        int year = Integer.parseInt(dto.getBirthDay().toString().substring(6,10));
-        int month = Integer.parseInt(dto.getBirthDay().toString().substring(3,5));
-        int day = Integer.parseInt(dto.getBirthDay().toString().substring(0,2));
+        int year = Integer.parseInt(dto.getBirthDay().toString().substring(6, 10));
+        int month = Integer.parseInt(dto.getBirthDay().toString().substring(3, 5));
+        int day = Integer.parseInt(dto.getBirthDay().toString().substring(0, 2));
         Person person = new Person(dto.getFirstName(), dto.getLastName(), LocalDate.of(year, month, day));
         if (!StringUtils.isEmpty(dto.getId())) {
             person.setId(dto.getId());
         }
         return person;
     }
-
 
 
 }

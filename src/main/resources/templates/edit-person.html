@@ -5,7 +5,7 @@
     <title>Edit person</title>
 </head>
 <body>
-<form th:action="@{/edit}" th:object="${person}" method="POST">
+<form th:action="@{/savePerson}" th:object="${person}" method="POST">
     <table>
         <tr>
             <td>First Name</td>
@@ -18,7 +18,7 @@
         </tr>
         <tr>
             <td>Birthday</td>
-            <td><input type="date" th:field="*{birthDay}" name="birthDay" /></td>
+            <td><input type="datetime-local" th:field="*{birthDay}" name="birthDay" /></td>
         </tr>
 
     </table>
