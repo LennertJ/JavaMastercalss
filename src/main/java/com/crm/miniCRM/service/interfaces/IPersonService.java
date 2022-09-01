@@ -14,4 +14,5 @@ public interface IPersonService {
     //Optional<Person> findById(Long aLong);
 
     void softDeleteById(Long id);
+    void savePerson(Person person);
 }

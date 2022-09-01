@@ -5,6 +5,7 @@ import com.crm.miniCRM.model.Person;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PersonRepository extends CrudRepository<Person, Long> {
 
@@ -19,5 +20,11 @@ public interface PersonRepository extends CrudRepository<Person, Long> {
         }
         person.setActive(false);
         return person;
+    }
+
+    default void savePerson(Person person){
+        Optional<Person> previous = findById(person.getId());
+
+
     }
 }

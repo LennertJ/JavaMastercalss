@@ -28,7 +28,7 @@
 				<td th:text="${person.isActive}"></td>
 				<td>
 					<a th:href="@{/persons/delete/{id}(id=${person.getId()})}" type="button" class="btn btn-danger">delete</a>
-					<button type="button" class="btn btn-warning">edit</button>
+					<a th:href="@{/persons/edit/{id}(id=${person.getId()})}" type="button" class="btn btn-warning">edit</a>
 				</td>
 			</tr>
 		</tbody>

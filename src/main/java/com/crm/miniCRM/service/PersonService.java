@@ -21,5 +21,12 @@ public class PersonService implements IPersonService {
     public void softDeleteById(Long id) {
         personRepository.softDeleteById(id);
     }
+    public void findById(Long id) {
+        personRepository.findById(id);
+    }
+    public void savePerson(Person person) {
+         personRepository.save(person);
+    }
+
 
 }
