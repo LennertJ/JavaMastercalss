@@ -9,17 +9,17 @@
 <body>
 <form th:action="@{/events/edit}" th:object="${event}" method="POST">
   <table>
-    <tr>
+    <tr>-
       <td>Description</td>
-      <td><input type="text" th:field="*{description}"
+      <td><input class="form-control" type="text" th:field="*{description}"
                  name="description" />
     </tr>
     <tr>
       <td>Date</td>
-      <td><input type="text" th:field="*{date}" name="date" /></td>
+      <td><input class="form-control" type="text" th:field="*{date}" name="date" /></td>
     </tr>
 
   </table>
-  <input type="submit" value="Update" />
+  <input class="btn btn-primary" type="submit" value="Update" />
 </form></body>
 </html>
