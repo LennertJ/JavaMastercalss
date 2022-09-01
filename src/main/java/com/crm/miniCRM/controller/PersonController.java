@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/persons")
 public class PersonController {
 
-    private PersonRepository personService;
+    private final PersonRepository personService;
 
     public PersonController(PersonRepository personService) {
         this.personService = personService;
@@ -39,28 +39,27 @@ public class PersonController {
         return "new-person";
     }
 
-    @GetMapping("/edit")
-    public String register() {
-        return "redirect:/";
-    }
-
     @PostMapping
     public String addperson(PersonDto person) {
-        personService.save(convertToEntity(person));
-
+        System.out.println(person.toString());
+        if(personService.findById(person.getId()).orElse(null)==null){
+            personService.save(convertToEntity(person));
+        }else{
+            personService.save(convertToEntity(person,"2022-02-22"));
+        }
         return "redirect:/persons";
     }
 
     @GetMapping("/edit/{id}")
     public String editPerson(Model model,@PathVariable("id") Long id) {
-        Optional<Person> person = null;
-        try {
-            person = personService.findById(id);
-        } catch (ResourceNotFoundException ex) {
+        Person person = personService.findById(id).orElse(null);
+        if(person==null){
             model.addAttribute("errorMessage", "Person not found");
+            return "redirect:/persons";
         }
+        person.setBirthDayAsString(person.getBirthDay().toString());
         model.addAttribute("person", person);
-
+        //System.out.println(model.toString());
         return "edit-person";
     }
 
@@ -81,6 +80,19 @@ public class PersonController {
         return new PersonDto(entity.getId(), entity.getFirstName(), entity.getLastName(), entity.getBirthDay().toString(), entity.isActive());
     }
 
+    protected Person convertToEntity(PersonDto dto, String birtdayAsString) {
+        System.out.println(dto);
+        //29-06-1963
+        int year = Integer.parseInt(birtdayAsString.substring(0, 4));
+        int month = Integer.parseInt(birtdayAsString.substring(5, 7));
+        int day = Integer.parseInt(birtdayAsString.substring(8, 10));
+        Person person = new Person(dto.getFirstName(), dto.getLastName(), LocalDate.of(year, month, day));
+        if (!StringUtils.isEmpty(dto.getId())) {
+            person.setId(dto.getId());
+        }
+        return person;
+    }
+
     protected Person convertToEntity(PersonDto dto) {
         //29-06-1963
         int year = Integer.parseInt(dto.getBirthDay().toString().substring(6, 10));
@@ -92,6 +104,5 @@ public class PersonController {
         }
         return person;
     }
-
 
 }

@@ -32,6 +32,15 @@ public class Person {
     private String firstName;
     private String lastName;
     private LocalDate birthDay;
+    private String birthDayAsString;
+
+    public String getBirthDayAsString() {
+        return birthDayAsString;
+    }
+
+    public void setBirthDayAsString(String birthDayAsString) {
+        this.birthDayAsString = birthDayAsString;
+    }
 
     private boolean isActive;
 
