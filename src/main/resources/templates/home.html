@@ -1,19 +1,21 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Good Thymes Virtual Grocery</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" type="text/css" media="all"
-          href="../../css/gtvg.css" th:href="@{/css/gtvg.css}" />
+
+    <title>HOME</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
 </head>
-
 <body>
+<h1 style="font-size: 100px; text-align: center">HOME PAGE</h1>
 
-<p th:text="#{home.welcome}">Welcome to our grocery store!</p>
-
+<div style="text-align: center">
+<p>
+    <a th:href="@{/persons}" class="btn btn-link">Persons</a>
+    <a th:href="@{/communities}" class="btn btn-link">Communities</a>
+    <a th:href="@{/members}" class="btn btn-link">Members</a>
+    <a th:href="@{/events}" class="btn btn-link">Events</a>
+</p>
+</div>
 </body>
-
 </html>

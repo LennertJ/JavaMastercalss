@@ -3,8 +3,11 @@
 <head>
 
 <title>Communities</title>
+	<link rel="stylesheet"
+		  href="style.css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
 
 </head>
 <body>
@@ -13,6 +16,7 @@
 			<tr>
 				<th>Id</th>
 				<th>Description</th>
+				<th>Actions</th>
 
 			</tr>
 		</thead>
@@ -20,12 +24,18 @@
 			<tr th:each="community : ${communities}">
 				<td th:text="${community.id}"></td>
 				<td th:text="${community.description}"></td>
+				<td>
+					<a th:href="@{/communities/delete/{id}(id=${community.getId()})}" type="button" class="btn btn-danger">delete</a>
+					<a th:href="@{/communities/edit/{id}(id=${community.getId()})}" type="button" class="btn btn-warning">edit</a>
+				</td>
 			</tr>
 		</tbody>
 	</table>
 
 	<p>
-		<a th:href="@{/communities/new}" class="btn btn-link">New community</a>
+		<a th:href="@{/communities/new}" class="buttonClass">New community</a>
+		<a th:href="@{/}" class="btn btn-link">Home</a>
 	</p>
+
 </body>
 </html>
