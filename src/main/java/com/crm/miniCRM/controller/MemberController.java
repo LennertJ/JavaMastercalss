@@ -68,28 +68,47 @@ public class MemberController {
 
     @GetMapping("/editMembers/{id}")
     public String editPerson(Model model,@PathVariable("id") Long id) {
-        MemberDto memberDto = CreateMemberDtoFromCommunity(id);
-        if(memberDto==null){ return "redirect:/persons";}
-        model.addAttribute("persons", memberDto.getPersons());
+        ArrayList<MemberDto> memberDtos = CreateMemberDtoFromCommunity(id);
+        assert memberDtos != null;
+        model.addAttribute("communityMembers", memberDtos.get(0).getPersons());
+        model.addAttribute("nonCommunityMembers", memberDtos.get(1).getPersons());
         return "edit-members";
         //return null;
     }
 
-    private MemberDto CreateMemberDtoFromCommunity(Long id) {
+    private ArrayList<MemberDto> CreateMemberDtoFromCommunity(Long id) {
         ArrayList<Member> members = (ArrayList<Member>) memberService.findAll();
         Community c = communityService.findById(id).orElse(null);
         if(c==null){
             return null;
         }
         MemberDto memberDto = new MemberDto(c);
-
+        MemberDto nonMemberDto = new MemberDto(c);
+        ArrayList<Long> personsAdded = new ArrayList<>();
+        Person person;
         for (Member member: members) {
             if(Objects.equals(member.getId().getCommunity_ID(), memberDto.getCommunity().getID())){
-                personService.findById(member.getId().getPerson_ID()).ifPresent(memberDto::addPersonToCommunity);
+                person = personService.findById(member.getId().getPerson_ID()).orElse(null);
+                if(person!=null){
+                    if(!personsAdded.contains(person.getId()) ){
+                        memberDto.addPersonToCommunity(person);
+                        personsAdded.add(person.getId());
+                    }
+                }
+            }else{
+                person = personService.findById(member.getId().getPerson_ID()).orElse(null);
+                if(person!=null){
+                    if(!personsAdded.contains(person.getId()) ){
+                        nonMemberDto.addPersonToCommunity(person);
+                        personsAdded.add(person.getId());
+                    }
+
+                }
             }
         }
-        System.out.println(memberDto.toString());
-
-        return memberDto;
+        ArrayList<MemberDto> memberDtos = new ArrayList<>();
+        memberDtos.add(memberDto);
+        memberDtos.add(nonMemberDto);
+        return memberDtos;
     }
 }
