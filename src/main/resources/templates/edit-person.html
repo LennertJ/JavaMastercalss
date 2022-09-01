@@ -3,25 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit person</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
-<form th:action="@{/savePerson}" th:object="${person}" method="POST">
-    <table>
-        <tr>
-            <td>First Name</td>
-            <td><input type="text" th:field="*{firstName}"
-                       name="firstName" />
-        </tr>
-        <tr>
-            <td>Last Name</td>
-            <td><input type="text" th:field="*{lastName}" name="lastName" /></td>
-        </tr>
-        <tr>
-            <td>Birthday</td>
-            <td><input type="datetime-local" th:field="*{birthDay}" name="birthDay" /></td>
-        </tr>
-
-    </table>
-    <input type="submit" value="Update" />
-</form></body>
-</html> 
+<div class="container ml-3 mt-4">
+    <form th:action="@{/persons}" th:object="${person}" method="post">
+        <div style="display: none">
+            <label class="col-form-label col-sm-2">id</label>
+            <input type="text" th:field="*{id}" name="firstName" class="form-control col-sm-6 ml-2"/>
+        </div>
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2">Last Name</label>
+            <input type="text" th:field="*{firstName}" name="firstName" class="form-control col-sm-6 ml-2"/>
+        </div>
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2">Last Name</label>
+            <input type="text" th:field="*{lastName}" name="lastName" class="form-control col-sm-6 ml-2" />
+        </div>
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2">Birth Day</label>
+        <div style="display: none">
+            <label class="col-form-label col-sm-2">id</label>
+            <input type="text" th:field="*{birthDay}" name="birthDay" class="form-control col-sm-6 ml-2"/>
+        </div>
+        <input type="submit" value="edit person" class="btn btn-primary ml-2"/>
+    </form>
+</div>
+</body>
+</html>
