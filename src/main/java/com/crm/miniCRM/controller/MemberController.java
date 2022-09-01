@@ -12,6 +12,7 @@ import com.crm.miniCRM.model.persistence.interfaces.PersonRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
@@ -63,5 +64,32 @@ public class MemberController {
         });
         model.addAttribute("members", memberDtos);
         return "members";
+    }
+
+    @GetMapping("/editMembers/{id}")
+    public String editPerson(Model model,@PathVariable("id") Long id) {
+        MemberDto memberDto = CreateMemberDtoFromCommunity(id);
+        if(memberDto==null){ return "redirect:/persons";}
+        model.addAttribute("persons", memberDto.getPersons());
+        return "edit-members";
+        //return null;
+    }
+
+    private MemberDto CreateMemberDtoFromCommunity(Long id) {
+        ArrayList<Member> members = (ArrayList<Member>) memberService.findAll();
+        Community c = communityService.findById(id).orElse(null);
+        if(c==null){
+            return null;
+        }
+        MemberDto memberDto = new MemberDto(c);
+
+        for (Member member: members) {
+            if(Objects.equals(member.getId().getCommunity_ID(), memberDto.getCommunity().getID())){
+                personService.findById(member.getId().getPerson_ID()).ifPresent(memberDto::addPersonToCommunity);
+            }
+        }
+        System.out.println(memberDto.toString());
+
+        return memberDto;
     }
 }

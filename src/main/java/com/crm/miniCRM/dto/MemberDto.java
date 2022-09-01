@@ -22,6 +22,11 @@ public class MemberDto {
         this.persons.add(person);
         this.personNames = person.getFirstName()+ "; ";
     }
+    public MemberDto(Community community) {
+        this.community = community;
+        this.persons = new ArrayList<>();
+    }
+
 
     public Community getCommunity() {
         return community;
