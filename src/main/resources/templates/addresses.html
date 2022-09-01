@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+  <title>Addresses</title>
+  <link rel="stylesheet"
+        href="style.css">
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+
+</head>
+<body>
+<table class="table col-md-6 ml-3">
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Street</th>
+    <th>Number</th>
+    <th>Box</th>
+    <th>Zip</th>
+    <th>City</th>
+    <th>Country</th>
+    <th>Type</th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="address : ${addresses}">
+    <td th:text="${address.id}"></td>
+    <td th:text="${address.street}"></td>
+    <td th:text="${address.number}"></td>
+    <td th:text="${address.box}"></td>
+    <td th:text="${address.zip}"></td>
+    <td th:text="${address.city}"></td>
+    <td th:text="${address.country}"></td>
+    <td th:text="${address.type}"></td>
+
+    <td>
+      <a th:href="@{/addresses/delete/{id}(id=${address.getId()})}" type="button" class="btn btn-danger">delete</a>
+      <a th:href="@{/addresses/edit/{id}(id=${address.getId()})}" type="button" class="btn btn-warning">edit</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<p>
+  <a th:href="@{/communities/new}" class="buttonClass">New community</a>
+  <a th:href="@{/}" class="btn btn-link">Home</a>
+</p>
+
+</body>
+</html>

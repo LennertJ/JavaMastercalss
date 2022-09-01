@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit address</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+</head>
+<body>
+<form style="padding: 10px" th:action="@{/addresses/edit}" th:object="${address}" method="POST">
+  <table>
+    <tr>
+      <td>Street</td>
+      <td><input class="form-control" type="text" th:field="*{street}"
+                 name="street" />
+    </tr>
+    <tr>
+      <td>Number</td>
+      <td><input class="form-control" type="text" th:field="*{number}" name="number" /></td>
+    </tr>
+    <tr>
+      <td>Box</td>
+      <td><input class="form-control" type="text" th:field="*{box}" name="box" /></td>
+    </tr>
+    <tr>
+      <td>Zip</td>
+      <td><input class="form-control" type="text" th:field="*{zip}" name="zip" /></td>
+    </tr>
+    <tr>
+      <td>City</td>
+      <td><input class="form-control" type="text" th:field="*{city}" name="city" /></td>
+    </tr>
+    <tr>
+      <td>Country</td>
+      <td><input class="form-control" type="text" th:field="*{country}" name="country" /></td>
+    </tr>
+    <tr>
+      <td>Type</td>
+      <td><input class="form-control" type="text" th:field="*{type}" name="country" /></td>
+    </tr>
+
+  </table>
+  <input style="padding: 10px" class="btn btn-primary" type="submit" value="Update" />
+
+</form></body>
+</html>
