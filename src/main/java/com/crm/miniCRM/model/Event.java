@@ -2,6 +2,7 @@ package com.crm.miniCRM.model;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 
 @Entity
@@ -13,14 +14,14 @@ public class Event {
     private String description;
     private LocalDate date;
 
-    //  private LocalTime time;
+//    private LocalTime time;
 
 
     public Event(){}
     public Event(String description, LocalDate date) {
         this.description = description;
         this.date = date;
-     //   this.time = time;
+//        this.time = time;
     }
 
 
@@ -54,7 +55,7 @@ public class Event {
                 "ID=" + id +
                 ", description='" + description + '\'' +
                 ", date=" + date +
-                //", time=" + time +
+//                ", time=" + time +
                 '}';
     }
 
