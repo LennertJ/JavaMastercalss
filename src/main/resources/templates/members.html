@@ -9,7 +9,7 @@
   <table class="table col-md-6 ml-3">
     <thead>
     <tr>
-      <th>community Id</th>
+      <th>community</th>
       <th>member Id</th>
       <th>member since</th>
       <th>member until</th>
@@ -18,7 +18,7 @@
     </thead>
     <tbody>
     <tr th:each="member : ${members}">
-      <td th:text="${member.communityId}"></td>
+      <td th:text="${member.Community.description}"></td>
       <td th:text="${member.personNames}"></td>
       <td th:text="${member.since}"></td>
       <td th:text="${member.until}"></td>

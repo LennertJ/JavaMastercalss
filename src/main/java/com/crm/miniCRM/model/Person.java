@@ -31,6 +31,7 @@ public class Person {
 
     private String firstName;
     private String lastName;
+<<<<<<< HEAD
         private LocalDate birthDay;
     private String birthDayAsString;
 
@@ -41,6 +42,9 @@ public class Person {
     public void setBirthDayAsString(String birthDayAsString) {
         this.birthDayAsString = birthDayAsString;
     }
+=======
+    private LocalDate birthDay;
+>>>>>>> 13eb0aff445d69dada8448f5227c239dfaf1cc17
 
     private boolean isActive;
 

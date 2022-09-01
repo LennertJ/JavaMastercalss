@@ -2,9 +2,11 @@ package com.crm.miniCRM.controller;
 
 import com.crm.miniCRM.dto.MemberDto;
 import com.crm.miniCRM.dto.PersonDto;
+import com.crm.miniCRM.model.Community;
 import com.crm.miniCRM.model.Member;
 import com.crm.miniCRM.model.Person;
 import com.crm.miniCRM.model.persistence.helpers.MemberID;
+import com.crm.miniCRM.model.persistence.interfaces.CommunityRepository;
 import com.crm.miniCRM.model.persistence.interfaces.MemberRepository;
 import com.crm.miniCRM.model.persistence.interfaces.PersonRepository;
 import org.springframework.stereotype.Controller;
@@ -13,17 +15,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 @RequestMapping(value = "/members")
 public class MemberController {
     private final MemberRepository memberService;
     private final PersonRepository personService;
+    private final CommunityRepository communityService;
 
-    public MemberController(MemberRepository memberService, PersonRepository personService) {
+    public MemberController(MemberRepository memberService, PersonRepository personService,CommunityRepository communityService) {
         this.memberService = memberService;
         this.personService = personService;
+        this.communityService = communityService;
     }
 
     @GetMapping
@@ -40,15 +46,21 @@ public class MemberController {
             }
             Long communityId = memberID.getCommunity_ID();
             for (MemberDto memberdto: memberDtos) {
-                if(memberdto.getCommunityId()==communityId){
+                if(Objects.equals(memberdto.getCommunity().getID(), communityId)){
                     memberdto.addPersonToCommunity(person);
                     communityExists = true;
                 }
             }
             if(!communityExists){
-                memberDtos.add(new MemberDto(communityId, person, m.getSince(),m.getUntil()));
+                System.out.println("communityId " + communityId);
+                Community c = communityService.findById(communityId).orElse(null);
+                if(c!=null){
+                    memberDtos.add(new MemberDto(c, person, m.getSince(),m.getUntil()));
+                }
+                else{
+                    System.out.println("oei");
+                }
             }
-
         });
         model.addAttribute("members", memberDtos);
         return "members";
