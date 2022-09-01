@@ -10,16 +10,21 @@
     <thead>
     <tr>
       <th>community Id</th>
+      <th>member Id</th>
       <th>member since</th>
       <th>member until</th>
-      <th>Is Active</th>
+      <th>edit members</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="member : ${members}">
-      <td th:text="${member.id}"></td>
+      <td th:text="${member.communityId}"></td>
+      <td th:text="${member.personNames}"></td>
       <td th:text="${member.since}"></td>
       <td th:text="${member.until}"></td>
+      <td>
+        <a href="/soon/tm/${member.communityId}" type="button" class="btn btn-warning">edit</a>
+      </td>
     </tr>
     </tbody>
   </table>
