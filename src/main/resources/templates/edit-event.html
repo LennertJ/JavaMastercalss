@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit event</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+</head>
+<body>
+<form th:action="@{/events/edit}" th:object="${event}" method="POST">
+  <table>
+    <tr>
+      <td>Description</td>
+      <td><input type="text" th:field="*{description}"
+                 name="description" />
+    </tr>
+    <tr>
+      <td>Date</td>
+      <td><input type="text" th:field="*{date}" name="date" /></td>
+    </tr>
+
+  </table>
+  <input type="submit" value="Update" />
+</form></body>
+</html>
