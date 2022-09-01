@@ -91,10 +91,9 @@ public class PersonController {
     }
 
     protected Person convertToEntity(PersonDto dto) {
-        //29-06-1963
-        int year = Integer.parseInt(dto.getBirthDay().toString().substring(6, 10));
-        int month = Integer.parseInt(dto.getBirthDay().toString().substring(3, 5));
-        int day = Integer.parseInt(dto.getBirthDay().toString().substring(0, 2));
+        int year = Integer.parseInt(dto.getBirthDay().substring(6, 10));
+        int month = Integer.parseInt(dto.getBirthDay().substring(3, 5));
+        int day = Integer.parseInt(dto.getBirthDay().substring(0, 2));
         Person person = new Person(dto.getFirstName(), dto.getLastName(), LocalDate.of(year, month, day));
         if (!StringUtils.isEmpty(dto.getId())) {
             person.setId(dto.getId());
