@@ -2,6 +2,7 @@ package com.crm.miniCRM;
 
 //https://spring.io/guides/gs/accessing-data-jpa/
 
+import com.crm.miniCRM.Util.CSVreader;
 import com.crm.miniCRM.model.*;
 import com.crm.miniCRM.model.persistence.interfaces.*;
 import com.crm.miniCRM.model.persistence.helpers.MemberID;
@@ -55,7 +56,6 @@ public class MiniCrmApplication {
         personAddressRepository.save(new PersonAddress(new PersonAddressID(2L, 1L), "b@c.com", "23434567", "34567789", 'P'));
         personAddressRepository.save(new PersonAddress(new PersonAddressID(3L, 2L), "d@e.com", "34345678", "34567789", 'P'));
         personAddressRepository.save(new PersonAddress(new PersonAddressID(4L, 3L), "f@g.com", "43456789", "34567789", 'P'));
-
         // fetch all Persons
         log.info("PersonAddress found with findAll():");
         log.info("-------------------------------");
@@ -165,7 +165,7 @@ public class MiniCrmApplication {
         personRepository.save(new Person("Kim", "Bauer", LocalDate.of(1973, 4, 29)));
         personRepository.save(new Person("David", "Palmer", LocalDate.of(1983, 10, 24)));
         personRepository.save(new Person("Michelle", "Dessler", LocalDate.of(1993, 7, 29)));
-
+        new CSVreader(personRepository).read();
         // fetch all Persons
         log.info("Persons found with findAll():");
         log.info("-------------------------------");
