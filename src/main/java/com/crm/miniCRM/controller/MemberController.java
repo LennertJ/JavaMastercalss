@@ -1,14 +1,13 @@
 package com.crm.miniCRM.controller;
 
 import com.crm.miniCRM.dto.MemberDto;
-import com.crm.miniCRM.dto.PersonDto;
-import com.crm.miniCRM.model.Community;
-import com.crm.miniCRM.model.Member;
-import com.crm.miniCRM.model.Person;
-import com.crm.miniCRM.model.persistence.helpers.MemberID;
-import com.crm.miniCRM.model.persistence.interfaces.CommunityRepository;
-import com.crm.miniCRM.model.persistence.interfaces.MemberRepository;
-import com.crm.miniCRM.model.persistence.interfaces.PersonRepository;
+import com.crm.miniCRM.controller.model.Community;
+import com.crm.miniCRM.controller.model.Member;
+import com.crm.miniCRM.controller.model.Person;
+import com.crm.miniCRM.controller.model.persistence.helpers.MemberID;
+import com.crm.miniCRM.controller.model.persistence.interfaces.CommunityRepository;
+import com.crm.miniCRM.controller.model.persistence.interfaces.MemberRepository;
+import com.crm.miniCRM.controller.model.persistence.interfaces.PersonRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 

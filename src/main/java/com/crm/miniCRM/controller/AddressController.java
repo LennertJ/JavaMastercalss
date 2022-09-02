@@ -1,12 +1,8 @@
 package com.crm.miniCRM.controller;
 
 import com.crm.miniCRM.dto.AddressDto;
-import com.crm.miniCRM.dto.PersonDto;
-import com.crm.miniCRM.model.Address;
-import com.crm.miniCRM.model.Event;
-import com.crm.miniCRM.model.Person;
-import com.crm.miniCRM.model.persistence.interfaces.AddressRepository;
-import com.crm.miniCRM.model.persistence.interfaces.PersonRepository;
+import com.crm.miniCRM.controller.model.Address;
+import com.crm.miniCRM.controller.model.persistence.interfaces.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

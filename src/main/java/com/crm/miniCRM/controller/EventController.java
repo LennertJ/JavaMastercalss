@@ -1,11 +1,9 @@
 package com.crm.miniCRM.controller;
 
 import com.crm.miniCRM.dto.EventDto;
-import com.crm.miniCRM.model.Event;
-import com.crm.miniCRM.model.Person;
-import com.crm.miniCRM.model.persistence.interfaces.EventRepository;
+import com.crm.miniCRM.controller.model.Event;
+import com.crm.miniCRM.controller.model.persistence.interfaces.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -21,7 +19,6 @@ import java.util.Optional;
 public class EventController {
     @Autowired
     private EventRepository eventRepository;
-
 
     @GetMapping
     public String getevent(Model model) {
@@ -41,7 +38,6 @@ public class EventController {
     @PostMapping
     public String addevent(EventDto event) {
         eventRepository.save(convertToEntity(event));
-
         return "redirect:/events";
     }
 
@@ -50,14 +46,11 @@ public class EventController {
         Optional<Event> event = null;
         event = eventRepository.findById(id);
         model.addAttribute("event", event);
-
         return "edit-event";
     }
 
     @PostMapping("/edit")
     public String saveEvent(@ModelAttribute("event") Event event) {
-        // save employee to database
-        // eventRepository.save(event);
         return "events";
     }
 

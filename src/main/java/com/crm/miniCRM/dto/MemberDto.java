@@ -1,8 +1,7 @@
 package com.crm.miniCRM.dto;
 
-import com.crm.miniCRM.model.Community;
-import com.crm.miniCRM.model.Person;
-import com.crm.miniCRM.model.persistence.helpers.MemberID;
+import com.crm.miniCRM.controller.model.Community;
+import com.crm.miniCRM.controller.model.Person;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

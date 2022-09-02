@@ -1,6 +1,6 @@
-package com.crm.miniCRM.model;
+package com.crm.miniCRM.controller.model;
 
-import com.crm.miniCRM.model.persistence.helpers.PersonAddressID;
+import com.crm.miniCRM.controller.model.persistence.helpers.PersonAddressID;
 
 import javax.persistence.*;
 import java.io.Serializable;

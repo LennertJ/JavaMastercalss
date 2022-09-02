@@ -1,12 +1,10 @@
 package com.crm.miniCRM;
 
-//https://spring.io/guides/gs/accessing-data-jpa/
-
 import com.crm.miniCRM.Util.CSVreader;
-import com.crm.miniCRM.model.*;
-import com.crm.miniCRM.model.persistence.interfaces.*;
-import com.crm.miniCRM.model.persistence.helpers.MemberID;
-import com.crm.miniCRM.model.persistence.helpers.PersonAddressID;
+import com.crm.miniCRM.controller.model.*;
+import com.crm.miniCRM.controller.model.persistence.interfaces.*;
+import com.crm.miniCRM.controller.model.persistence.helpers.MemberID;
+import com.crm.miniCRM.controller.model.persistence.helpers.PersonAddressID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -19,7 +17,6 @@ import java.util.Optional;
 
 @SpringBootApplication
 public class MiniCrmApplication {
-
     private static final Logger log = LoggerFactory.getLogger(MiniCrmApplication.class);
 
     public static void main(String[] args) {
@@ -35,18 +32,11 @@ public class MiniCrmApplication {
                                          EventRepository eventRepository
     ) {
         return (args) -> {
-
-//Person
             extractPersons(personRepository);
-//Address
             extractAddresses(addressRepository);
-//Community
             extractCommunities(communityRepository);
-//Event
             extractEvents(eventRepository);
-//Member
             extractMembers(memberRepository);
-//PersonAddress
             extractPersonAddresses(personAddressRepository);
         };
     }
@@ -64,15 +54,12 @@ public class MiniCrmApplication {
         }
         log.info("");
 
-        // fetch addresses from an individual Person by ID
-
         log.info("Addresses found with findById(new PersonAddressID()):");
         log.info("--------------------------------");
         Optional<PersonAddress> personAddress = personAddressRepository.findById(new PersonAddressID(1L, 1L));
         log.info(personAddress.toString());
 
         log.info("");
-
     }
 
     private static void extractEvents(EventRepository eventRepository) {
@@ -211,13 +198,11 @@ public class MiniCrmApplication {
             log.info(member.toString());
         }
         log.info("");
-// fetch an individual Person by ID
+
         Optional<Member> member = memberRepository.findById(new MemberID(1L, 3L));
         log.info("Member found with findById(1L):");
         log.info("--------------------------------");
         log.info(member.toString());
         log.info("");
     }
-
-
 }

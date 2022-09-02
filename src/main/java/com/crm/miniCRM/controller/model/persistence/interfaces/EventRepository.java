@@ -1,6 +1,6 @@
-package com.crm.miniCRM.model.persistence.interfaces;
+package com.crm.miniCRM.controller.model.persistence.interfaces;
 
-import com.crm.miniCRM.model.Event;
+import com.crm.miniCRM.controller.model.Event;
 import org.springframework.data.repository.CrudRepository;
 
 import java.time.LocalDate;

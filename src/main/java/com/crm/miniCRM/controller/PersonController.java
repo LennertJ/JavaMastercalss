@@ -3,12 +3,10 @@ package com.crm.miniCRM.controller;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import com.crm.miniCRM.dto.PersonDto;
-import com.crm.miniCRM.model.Person;
-import com.crm.miniCRM.model.persistence.interfaces.PersonRepository;
-import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import com.crm.miniCRM.controller.model.Person;
+import com.crm.miniCRM.controller.model.persistence.interfaces.PersonRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -17,13 +15,10 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping(value = "/persons")
 public class PersonController {
-
     private final PersonRepository personService;
-
     public PersonController(PersonRepository personService) {
         this.personService = personService;
     }
-
     @GetMapping
     public String getpersons(Model model) {
         Iterable<Person> persons = personService.findAll();

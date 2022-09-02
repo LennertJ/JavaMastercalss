@@ -1,4 +1,4 @@
-package com.crm.miniCRM.model;
+package com.crm.miniCRM.controller.model;
 
 import javax.persistence.*;
 import java.util.List;

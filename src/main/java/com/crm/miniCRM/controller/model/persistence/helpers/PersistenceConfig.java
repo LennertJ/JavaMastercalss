@@ -1,4 +1,4 @@
-package com.crm.miniCRM.model.persistence.helpers;
+package com.crm.miniCRM.controller.model.persistence.helpers;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

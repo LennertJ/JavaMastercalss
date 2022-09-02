@@ -1,6 +1,6 @@
-package com.crm.miniCRM.model.persistence.interfaces;
+package com.crm.miniCRM.controller.model.persistence.interfaces;
 
-import com.crm.miniCRM.model.Community;
+import com.crm.miniCRM.controller.model.Community;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

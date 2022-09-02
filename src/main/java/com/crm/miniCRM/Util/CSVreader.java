@@ -1,28 +1,26 @@
 package com.crm.miniCRM.Util;
 
-import com.crm.miniCRM.model.Person;
-import com.crm.miniCRM.model.persistence.interfaces.PersonRepository;
+import com.crm.miniCRM.MiniCrmApplication;
+import com.crm.miniCRM.controller.model.Person;
+import com.crm.miniCRM.controller.model.persistence.interfaces.PersonRepository;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class CSVreader {
-
     private final PersonRepository personRepository;
-
+    private static final org.slf4j.Logger log = LoggerFactory.getLogger(MiniCrmApplication.class);
     public CSVreader(PersonRepository personRepository) {
         this.personRepository = personRepository;
     }
     public void read() {
-        System.out.println("enters reader");
+        log.info("enters reader");
         try (BufferedReader reader = Files.newBufferedReader(Paths.get("src/main/resources/persons.csv"))) {
             String line;
-            System.out.println("open file");
+            log.info("open file");
             while ((line = reader.readLine()) != null) {
                 personRepository.save(lineToPerson(line));
             }

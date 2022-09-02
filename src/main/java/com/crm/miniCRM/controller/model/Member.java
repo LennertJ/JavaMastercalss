@@ -1,6 +1,6 @@
-package com.crm.miniCRM.model;
+package com.crm.miniCRM.controller.model;
 
-import com.crm.miniCRM.model.persistence.helpers.MemberID;
+import com.crm.miniCRM.controller.model.persistence.helpers.MemberID;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
